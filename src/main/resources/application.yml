@@ -1,0 +1,41 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /
+
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
+    username: ten
+    password: 1q2w3e4r5t!
+  
+  jpa:
+  # true : 커넥션 시작부터 api 응답이 끝날 때 까지 영속성이 유지 된다.
+  #         false 일때 Controller에서 지연 로딩을 할 수 없다 True는 접근이 가능한데 단점은
+  #         영속성 컨텍스트는 기본적으로 DB컨넥션을 유지하기 때문에 잠점이지만
+  #         
+    open-in-view: true 
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: FALSE
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      
+tenco:
+  key: 85135f3c6bfe9df1735f8806f045ae73cece7219f7840d8e7e9297a7f846b48a
+      
+      
+      
