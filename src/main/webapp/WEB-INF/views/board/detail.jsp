@@ -15,7 +15,8 @@
 	<br /> <br /> <br />
 
 	<div>
-		글 번호 : <span id="board-id"><i>${board.id}</i> </span>
+		<input type="hidden" id="board-id" value="${board.id}">
+		글 번호 : <span><i>${board.id + 100}</i> </span>
 	</div>
 	<div>
 		글 작성자 : <span> ${board.user.username}</span>
@@ -30,11 +31,11 @@
 	<br /> <br />
 	<div class="card">
 		<div class="card-body">
-			<textarea rows="1" class="form-control"></textarea>
+			<textarea rows="1" class="form-control" id="content"></textarea>
 
 		</div>
 		<div class="card-footer">
-			<button class="btn btn-primary">등록</button>
+			<button class="btn btn-primary" id="btn-reply-save">등록</button>
 		</div>
 	</div>
 	<br />
@@ -47,7 +48,7 @@
 			<div>${reply.content}</div>
 			<div class="d-flex">
 				<div>작성자 :&nbsp; &nbsp;[ ${reply.user.username} ] &nbsp; &nbsp;</div>
-				<button class="btn btn-danger">삭제</button>
+				<button class="btn btn-danger badge" >삭제</button>
 			</div>
 		</li>
 	</ul>

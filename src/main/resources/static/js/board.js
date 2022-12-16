@@ -13,6 +13,10 @@ let index = {
 			this.update();
 		});
 		
+		$("#btn-reply-save").bind("click", () => {
+			this.replySave();
+		});
+		
 	}, 
 	save : function() {
 		
@@ -80,6 +84,31 @@ let index = {
 			console.log(error);
 			alert("글 수정에 실패 하였습니다");
 		}); 
+		
+	},
+	replySave : function() {
+		
+		let replydata = {
+			boardId: $("#board-id").val(), // fk (board pk) 
+			content: $("#content").val()
+		};
+		// ajax 통신 요청 
+		$.ajax({
+			type:"POST", 
+			url: `/api/board/${replydata.boardId}/reply`, 
+			data: JSON.stringify(replydata),
+			contentType : "application/json; charset=utf-8", 
+			dataType: "json"
+		}).done(function(data, textSatus, xhr) {
+			if(data.status == "OK") {
+				alert("댓글작성이 완료 되었습니다.");
+				location.href = `/board/${replydata.boardId}`;
+			}
+		}).fail((error) => {
+			console.log(error);
+			alert("댓글 작성에 실패 하였습니다.");
+			
+		} );
 		
 	}
 }

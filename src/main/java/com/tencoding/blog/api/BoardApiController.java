@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tencoding.blog.auth.PrincipalDetail;
 import com.tencoding.blog.dto.Board;
+import com.tencoding.blog.dto.Reply;
 import com.tencoding.blog.dto.ResponseDto;
 import com.tencoding.blog.service.BoardService;
 
@@ -43,4 +44,15 @@ public class BoardApiController {
 		int result = boardService.modifyBoard(boardId, board); 
 		return new ResponseDto<Integer>(HttpStatus.OK, result);
 	}
+	
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reuestReply,@AuthenticationPrincipal PrincipalDetail principalDetail) {
+		
+		System.out.println("댓글 기능 추가 api");
+		
+		boardService.writeReply(boardId, reuestReply, principalDetail.getUser());
+		
+		return new ResponseDto<Integer>(HttpStatus.OK,1);
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.tencoding.blog.dto;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,9 +49,9 @@ public class Board {
 	// 오브젝트를 다둘 때 가지고 와 달라고 요청해야 함 (mappedMy)
 	// Board <---> Reply 관계
 	// 연관 관계에 주인이 아니다. (select 할 때 가지고 와야 하는 데이터 이다. )
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@OrderBy("id desc") // id값 최근순으로 정렬 
-	@JsonIgnoreProperties({"board"}) // Reply 안에 있는 board getter를 무시(호출됨 )
+	@JsonIgnoreProperties({"board", "content"}) // Reply 안에 있는 board getter를 무시(호출됨 )
 	private List<Reply> replys;
 	// reply - FK board table 생성이 된다.  1 정규화 위반 !! 
 	
